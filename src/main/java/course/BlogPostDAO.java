@@ -25,6 +25,8 @@ import com.mongodb.DBObject;
 import com.mongodb.WriteResult;
 import com.sun.org.apache.bcel.internal.generic.ACONST_NULL;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -41,7 +43,10 @@ public class BlogPostDAO {
 
         DBObject post = null;
         // XXX HW 3.2,  Work Here
-
+        DBObject query = new BasicDBObject(); 
+        query.put("permalink", permalink);
+        
+        post = postsCollection.findOne(query); 
 
 
         return post;
@@ -81,14 +86,19 @@ public class BlogPostDAO {
 
         // Build the post object and insert it
         
-        post.append("permalink", permalink);
-        post.append("date", new Date());
+        // Format todays date
+        DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        String postdate = df.format(date);
+        
+        post.append("title", permalink);
+        post.append("date", postdate);
         post.append("author", username);
-        post.append("title", title);
         post.append("body", body);
         post.append("tags", tags);
-        post.append("comments", new ArrayList<String>());
+        post.append("comments", new ArrayList());
         
+        postsCollection.save(post);
         
 
         return permalink;
