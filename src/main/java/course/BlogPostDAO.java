@@ -91,14 +91,14 @@ public class BlogPostDAO {
         Date date = new Date();
         String postdate = df.format(date);
         
-        post.append("title", permalink);
-        post.append("date", postdate);
-        post.append("author", username);
-        post.append("body", body);
-        post.append("tags", tags);
-        post.append("comments", new ArrayList());
+        post.put("title", permalink);
+        post.put("date", postdate);
+        post.put("author", username);
+        post.put("body", body);
+        post.put("tags", tags);
+        post.put("comments", new ArrayList());
         
-        postsCollection.save(post);
+        postsCollection.insert(post);
         
 
         return permalink;
