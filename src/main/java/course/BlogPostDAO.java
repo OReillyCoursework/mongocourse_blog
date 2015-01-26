@@ -44,7 +44,7 @@ public class BlogPostDAO {
         DBObject post = null;
         // XXX HW 3.2,  Work Here
         DBObject query = new BasicDBObject(); 
-        query.put("permalink", permalink);
+        query.put("title", permalink);
         
         post = postsCollection.findOne(query); 
 
