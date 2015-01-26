@@ -48,7 +48,7 @@ public class BlogPostDAO {
         
         post = postsCollection.findOne(query); 
 
-
+        System.out.println("Post by permalink is: "+ post);
         return post;
     }
 
@@ -59,8 +59,10 @@ public class BlogPostDAO {
         List<DBObject> posts = null;
         // XXX HW 3.2,  Work Here
         // Return a list of DBObjects, each one a post from the posts collection
-
-        return posts;
+        // TODO add the find logic here, for now it only adds the one post
+        posts.add(findByPermalink("dg"));  
+        System.out.println("DBObject list :" + posts);
+	return posts;
     }
 
 
@@ -87,7 +89,7 @@ public class BlogPostDAO {
         // Build the post object and insert it
         
         // Format todays date
-        DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        DateFormat df = new SimpleDateFormat("MMM d, yyyy h:mm:ss a");
         Date date = new Date();
         String postdate = df.format(date);
         
