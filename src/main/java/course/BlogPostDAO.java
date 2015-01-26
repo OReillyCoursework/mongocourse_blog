@@ -56,12 +56,19 @@ public class BlogPostDAO {
     // how many posts are returned.
     public List<DBObject> findByDateDescending(int limit) {
 
-        List<DBObject> posts = null;
+        List<DBObject> posts = new ArrayList(); //null;
         // XXX HW 3.2,  Work Here
         // Return a list of DBObjects, each one a post from the posts collection
-        // TODO add the find logic here, for now it only adds the one post
-        posts.add(findByPermalink("dg"));  
-        System.out.println("DBObject list :" + posts);
+        
+
+	//DBObject query = new BasicDBObject();
+	DBCursor cursor = postsCollection.find();//.limit(10);
+
+	while (cursor.hasNext()) {
+	  posts.add(cursor.next());
+	}
+	
+	System.out.println("DBObject has: " + posts);
 	return posts;
     }
 
